@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:jxb="http://java.sun.com/xml/ns/jaxb"
+            jxb:version="2.0">
+
+    <xsd:element name="Greetings" type="GreetingListType"/>
+    <xsd:element name="Comm" type="CommType"/>
+
+    <xsd:complexType name="GreetingListType">
+        <xsd:sequence>
+            <xsd:element name="Greeting" type="GreetingType"
+                         minOccurs="1"  maxOccurs="3"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:simpleType name="CounterType">
+        <xsd:restriction base="xsd:int" >
+            <xsd:minInclusive value="10"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="ShortNameType">
+        <xsd:restriction base="xsd:string">
+            <xsd:minLength  value="1"/>
+            <xsd:maxLength  value="3"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:complexType name="RouteType">
+        <xsd:attribute name="Pos" type="xsd:int" use="optional" default="1"/>
+        <xsd:attribute name="Dir" type="xsd:string" use="required"/>
+    </xsd:complexType>
+
+    <xsd:complexType name="CommType">
+        <xsd:choice>
+            <xsd:element name="SMS"   type="xsd:string"/>
+            <xsd:element name="MMS"   type="xsd:string"/>
+            <xsd:element name="Email" type="xsd:string"/>
+        </xsd:choice>
+    </xsd:complexType>
+
+
+    <xsd:complexType name="GreetingType">
+        <xsd:sequence>
+            <xsd:element name="Text" type="xsd:string"/>
+            <xsd:element name="aantal" type="xsd:integer"/>
+            <xsd:element name="byte"            type="xsd:byte"
+                         default="13"
+                         nillable="true"/>
+            <xsd:element name="counter"  default="100" type="CounterType"/>
+            <xsd:element name="shortname" type="ShortNameType"/>
+        </xsd:sequence>
+        <xsd:attribute name="language"  type="xsd:language"/>
+        <xsd:attribute name="aantal2" type="xsd:integer"/>
+    </xsd:complexType>
+
+</xsd:schema>
